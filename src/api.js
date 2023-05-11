@@ -1,5 +1,3 @@
-
-import _ from 'lodash';
 import authentication from './authentication.js';
 import initalizeEndpoints from './endpoints.js';
 
@@ -110,15 +108,15 @@ class Api {
 		const options = {
 			host: this.config.host,
 			port: this.config.port,
-			path: path,
-			method: method,
+			path,
+			method,
 			data: body
 		};
 
 		options.headers = authentication.prepareHeaders(this.config.apiKey, method, path, options);
 		options.headers['Content-Type'] = 'application/json';
 
-		if (expectedStatusCodes && !_.isArray(expectedStatusCodes)) expectedStatusCodes = [expectedStatusCodes];
+		if (expectedStatusCodes && !Array.isArray(expectedStatusCodes)) expectedStatusCodes = [expectedStatusCodes];
 
 		return new Promise((resolve, reject) => {
 			const req = protocol.request(options, (res) => {
@@ -129,7 +127,7 @@ class Api {
 				res.on('data', (data) => { responseString += data; });
 
 				res.on('end', () => {
-					if (!expectedStatusCodes || (_.indexOf(expectedStatusCodes, res.statusCode) !== -1)) {
+					if (!expectedStatusCodes || (expectedStatusCodes.indexOf(res.statusCode) !== -1)) {
 						resolve({ statusCode: res.statusCode, body: JSON.parse(responseString) });
 					} else {
 						// eslint-disable-next-line prefer-promise-reject-errors
