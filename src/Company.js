@@ -37,7 +37,7 @@ class Company {
 	*/
 	getName(options) {
 		return this.api.call({
-			path: `/company/name?name=${options.name}`
+			path: `/company/name?name=${encodeURIComponent(options.name)}`
 		}, {}, [200, 404]);
 	}
 
