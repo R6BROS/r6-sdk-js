@@ -1,6 +1,6 @@
 {
 	"name": "@r6bros/r6-sdk-js",
-	"version": "0.9.4",
+	"version": "0.9.5",
 	"type": "module",
 	"main": "index.js",
 	"license": "MIT",
